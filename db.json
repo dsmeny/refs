@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Brad"
+    },
+    {
+      "id": 2,
+      "name": "Sonia"
+    },
+    {
+      "name": "Change",
+      "id": 3
+    },
+    {
+      "name": "Change Again",
+      "id": 4
+    }
+  ],
+  "repositories": [
+    {
+      "id": 1,
+      "url": "https://github.com/bradleyrubin/hello",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "url": "https://github.com/bradleyrubin/second",
+      "userId": 2
+    }
+  ]
+}
