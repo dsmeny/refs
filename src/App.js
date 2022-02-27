@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef, useState, useEffect } from "react";
+import styled from "styled-components";
+import { useQuery } from "react-query";
+import UserForm from "./components/UserForm";
 
-function App() {
+/* styles */
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+  min-height: 100vh;
+`;
+
+/* functions */
+const fetcher = async () => {
+  const response = await fetch("http://localhost:4000/users");
+  const data = await response.json();
+  return data;
+};
+
+/* components */
+
+const Container = ({ users }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {users.map((user) => (
+        <div key={user.id}>
+          <p>{user.name}</p>
+        </div>
+      ))}
     </div>
   );
-}
+};
+
+const App = () => {
+  const { isLoading, isError, data } = useQuery("users", fetcher);
+
+  if (isLoading) {
+    return <p>Loading data...</p>;
+  }
+
+  if (isError) {
+    return <p>Error loading data...</p>;
+  }
+
+  return (
+    <Wrapper>
+      <Container users={data} />
+      <UserForm />
+    </Wrapper>
+  );
+};
 
 export default App;
