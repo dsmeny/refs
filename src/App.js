@@ -1,4 +1,3 @@
-import { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import UserForm from "./components/UserForm";
@@ -20,7 +19,6 @@ const fetcher = async () => {
 };
 
 /* components */
-
 const Container = ({ users }) => {
   return (
     <div>
