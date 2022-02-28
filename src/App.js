@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useQuery } from "react-query";
+import useUserContext from "./hooks/useUserContext";
 import UserForm from "./components/UserForm";
+import Container from "./components/Container";
 
 /* styles */
 const Wrapper = styled.div`
@@ -11,42 +12,16 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 
-/* functions */
-const fetcher = async () => {
-  const response = await fetch("http://localhost:4000/users");
-  const data = await response.json();
-  return data;
-};
-
-/* components */
-const Container = ({ users }) => {
-  return (
-    <div>
-      {users.map((user) => (
-        <div key={user.id}>
-          <p>{user.name}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 const App = () => {
-  const { isLoading, isError, data } = useQuery("users", fetcher);
-
-  if (isLoading) {
-    return <p>Loading data...</p>;
-  }
-
-  if (isError) {
-    return <p>Error loading data...</p>;
-  }
+  const [userData, UserProvider] = useUserContext();
 
   return (
-    <Wrapper>
-      <Container users={data} />
-      <UserForm />
-    </Wrapper>
+    <UserProvider>
+      <Wrapper>
+        <Container />
+        <UserForm />
+      </Wrapper>
+    </UserProvider>
   );
 };
 
