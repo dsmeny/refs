@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import useUserContext from "./hooks/useUserContext";
 import UserForm from "./components/UserForm";
 import Container from "./components/Container";
 
@@ -13,15 +12,11 @@ const Wrapper = styled.div`
 `;
 
 const App = () => {
-  const [userData, UserProvider] = useUserContext();
-
   return (
-    <UserProvider>
-      <Wrapper>
-        <Container />
-        <UserForm />
-      </Wrapper>
-    </UserProvider>
+    <Wrapper>
+      <Container />
+      <UserForm />
+    </Wrapper>
   );
 };
 

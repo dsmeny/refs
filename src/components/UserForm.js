@@ -1,6 +1,7 @@
 import { useRef } from "react";
-import { useMutation } from "react-query";
+import { useQueryPost } from "../hooks/userQueries";
 import AccountNavigation from "./AccountNavigation";
+import SelectOptions from "./SelectOptions";
 
 import styled from "styled-components";
 
@@ -35,15 +36,7 @@ const Button = styled.button`
 `;
 
 const UserForm = () => {
-  const mutation = useMutation((newUser) => {
-    return fetch("http://localhost:4000/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    });
-  });
+  const mutation = useQueryPost();
 
   const nameRef = useRef();
 
@@ -57,7 +50,13 @@ const UserForm = () => {
   return (
     <Form onSubmit={submitHandler}>
       <AccountNavigation />
-      <Input type="text" placeholder="enter a name" ref={nameRef} />
+      <Input
+        type="text"
+        placeholder="enter a name"
+        minLength="3"
+        ref={nameRef}
+      />
+      <SelectOptions />
       <Button>Add a name</Button>
     </Form>
   );

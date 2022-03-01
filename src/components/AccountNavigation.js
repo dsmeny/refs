@@ -8,7 +8,6 @@ const AccountNavigation = () => {
   const { activeLinkHandler, clickHandler } = handlers;
 
   useEffect(() => {
-    console.log("useEffect fired!!");
     if (activeLinks.length > 1) {
       activeLinkHandler();
     }

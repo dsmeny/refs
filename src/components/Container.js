@@ -1,8 +1,8 @@
-import useUserContext from "../hooks/useUserContext";
+import { useUserQuery } from "../hooks/userQueries";
 
 const Container = () => {
-  const [userData] = useUserContext();
-  const { isLoading, isError, data } = userData;
+  const { isLoading, isError, data } = useUserQuery();
+  console.log("Container data: ", data);
 
   if (isLoading) {
     return <p>Loading data...</p>;
